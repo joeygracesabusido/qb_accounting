@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Entry Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            border-spacing: 0; /* Add this line to remove spacing */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Journal Entry Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Debit Account</th>
+                <th>Credit Account</th>
+                <th>Amount</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="journalBody">
+            <!-- Journal entry rows will be dynamically added here -->
+        </tbody>
+    </table>
+    <button onclick="addJournalEntry()">Add Journal Entry</button>
+
+    <script>
+        let nextRowId = 1;
+
+        function addJournalEntry() {
+            // Create a new row for the journal entry
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${nextRowId}</td>
+                <td><input type="date" name="date${nextRowId}"></td>
+                <td><input type="text" name="description${nextRowId}"></td>
+                <td><input type="text" name="debitAccount${nextRowId}"></td>
+                <td><input type="text" name="creditAccount${nextRowId}"></td>
+                <td><input type="number" name="amount${nextRowId}"></td>
+                <td><button onclick="deleteRow(this)">Delete</button></td>
+            `;
+
+            // Append the new row to the table
+            const journalBody = document.getElementById("journalBody");
+            journalBody.appendChild(newRow);
+
+            // Increment the nextRowId
+            nextRowId++;
+        }
+
+        function deleteRow(button) {
+            // Remove the entire row when the delete button is clicked
+            const row = button.parentNode.parentNode;
+            const journalBody = document.getElementById("journalBody");
+            journalBody.removeChild(row);
+        }
+    </script>
+</body>
+</html>
