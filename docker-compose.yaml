@@ -1,0 +1,12 @@
+version: '3'
+services:
+  accounting:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: accounting
+    command: uvicorn apps.main:app --host 0.0.0.0 --port 80 --reload --reload-include *
+    ports:
+      - "8000:80"
+    volumes:
+      - ./apps:/code/apps
