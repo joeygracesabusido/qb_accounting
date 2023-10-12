@@ -72,7 +72,7 @@ def authenticate_user(username, password):
             return password_check
 
         else :
-            False
+            return {'Error':'Password is incorrect'}
 
 
 @login_router.get('/api-login/')
@@ -82,9 +82,17 @@ def login(username1: Optional[str],password1:Optional[str],response:Response):
 
 
     user = authenticate_user(username,password)
+
+    user_result = mydb.login.find({"username":username})
+
+    agg_result= mydb.chart_of_account.count_documents(user_result)
+
+    
+
+   
     if not user:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
-       
+        raise HTTPException(status_code=400, detail="No Username Stored in the DataBase")
+        
 
     access_token = create_access_token(
                 data = {"sub": username,"exp":datetime.utcnow() + timedelta(ACCESS_TOKEN_EXPIRE_MINUTES)}, 
@@ -97,6 +105,9 @@ def login(username1: Optional[str],password1:Optional[str],response:Response):
     # return response
     
     return {"access_token": jwt_token, "token_type": "bearer"}
+    
+
+    
 
 
 # how to get the user through authentication
@@ -141,6 +152,11 @@ async def get_current_user(request:Request):
         )
 
 
-@login_router.get("/")
-def read_root():
-    return {"Hello": "World!!!"}
+@login_router.get("/", response_class=HTMLResponse)
+async def api_login(request: Request):
+    return templates.TemplateResponse("login/login.html", {"request": request})
+
+
+@login_router.get("/dashboard/", response_class=HTMLResponse)
+async def api_login(request: Request):
+    return templates.TemplateResponse("dashboard/dashboard.html", {"request": request})
