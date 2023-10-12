@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 jinja2
-python-jose[cryptography])
-passlib[bcrypt]
+cryptography
+passlib
+python-jose==3.3.0
 pymongo
