@@ -83,9 +83,9 @@ def login(username1: Optional[str],password1:Optional[str],response:Response):
 
     user = authenticate_user(username,password)
 
-    user_result = mydb.login.find({"username":username})
+    # user_result = mydb.login.find({"username":username})
 
-    agg_result= mydb.chart_of_account.count_documents(user_result)
+    # agg_result= mydb.chart_of_account.count_documents(user_result)
 
     
 

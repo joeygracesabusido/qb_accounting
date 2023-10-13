@@ -62,7 +62,7 @@
 <body>
     <!-- Fixed top navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="/dashboard/">Dashboard</a>
+        <a class="navbar-brand" href="#">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -71,17 +71,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profile</a>
                 </li>
-                
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Accounting
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="/chart-of-account/">Accounting</a>
-                      
-                    </div>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="/chart-of-account/">Chart of Account</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Logout</a>
                 </li>
@@ -243,7 +235,7 @@
             <!-- Chart of Account table -->
             <div class="container mt-3">
                 <div class="container mt-3">
-                    <table id="myTable2" class="table table-bordered"  style="text-align: center;">
+                    <table id="myTable" class="table table-bordered"  style="text-align: center;">
                         <thead class="border-bottom font-weight-bold">
                         
                                 <td>Series No.</td>
@@ -463,14 +455,10 @@
     //     $(document).ready(function () {
     //     $('#myTable').DataTable();
     // });
-    new DataTable('#myTable2');
+    new DataTable('#myTable');
     </script>
 
     <script src="/static/accounting_trans/accounting_trans.js"></script>
     
 </body>
 </html>
-
-{% block content %}
-
-{% endblock %}

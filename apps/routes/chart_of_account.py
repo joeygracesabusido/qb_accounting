@@ -65,8 +65,22 @@ async def get_current_user(request:Request):
 
 @chart_of_account_router.get("/chart-of-account/", response_class=HTMLResponse)
 async def api_login(request: Request, username: str = Depends(get_current_user)):
+    all_bstype = mydb.bs_type.find().sort('bstype', 1)
 
-    return templates.TemplateResponse("chart_of_account/chart_of_account.html", {"request": request})
+    
+    
+    bs_type = [
+        
+            {
+                "bstype": i['bstype']
+                  
+            }
+           for i in all_bstype
+        ]
+
+
+
+    return templates.TemplateResponse("chart_of_account/chart_of_account.html", {"request": request,'bs_type':bs_type})
 
 @chart_of_account_router.post("/api-insert-balance-sheet-type")
 async def api_add_balancesheetType(item: BalanceSheetType, username: str = Depends(get_current_user)):# this is for inserting balancesheet type
